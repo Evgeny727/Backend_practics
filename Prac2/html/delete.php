@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 $id = $_POST["id"];
 
 // SQL-запрос для удаления студента по ID
-$sql = "DELETE FROM products WHERE id='$id'";
+$sql = "DELETE FROM students WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
     // Перенаправление на страницу чтения информации о студентах после успешного удаления
