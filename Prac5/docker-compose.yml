@@ -1,0 +1,59 @@
+version: '3'
+services:
+  apache:
+    build:
+      dockerfile: apache/Dockerfile
+      context: .
+    container_name: Php-practice-5
+    volumes:
+      - ./apache/static/:/var/www/html/
+      - ./apache/conf/apache-config.conf:/etc/apache2/sites-available/000-default.conf
+      - ./apache/conf/apache-config.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./apache/conf/ports.conf:/etc/apache2/ports.conf
+      - ./apache/logs/:/var/log/apache2/
+    depends_on:
+      - db-mysql
+
+  db-mysql:
+    image: mysql:5.7
+    container_name: My-sql-practice-5
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: appDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend-java:
+    env_file:
+      - .env
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: Java-backend-practice-5
+    volumes:
+      - ./backend/src/:/backend/src/
+    command: >
+      sh -c 
+      "mvn install && 
+      java -jar /backend/target/backend-0.0.1-SNAPSHOT.jar"
+
+  db-posgresql:
+    env_file:
+      - .env
+    container_name: Postgresql-practice-5
+    image: postgres:14-alpine3.17
+
+  nginx:
+    container_name: Nginx-practice-5
+    image: nginx:1.21.0-alpine
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/etc/nginx/logs
+      - ./nginx/static/:/usr/share/nginx/html/
+    ports:
+      - "80:80"
+    depends_on:
+      - apache
+
