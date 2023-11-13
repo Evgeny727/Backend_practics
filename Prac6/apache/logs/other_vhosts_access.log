@@ -1,0 +1,4 @@
+172.22.0.5:8080 172.22.0.6 - - [13/Nov/2023:14:26:51 +0000] "GET /students.php HTTP/1.0" 200 992 "http://localhost/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+172.22.0.5:8080 172.22.0.6 - - [13/Nov/2023:14:26:53 +0000] "GET /universities.php HTTP/1.0" 200 1028 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+172.25.0.5:8080 172.25.0.6 - - [13/Nov/2023:16:03:45 +0000] "GET /students.php HTTP/1.0" 200 992 "http://localhost/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+172.25.0.5:8080 172.25.0.6 - - [13/Nov/2023:16:03:47 +0000] "GET /universities.php HTTP/1.0" 200 1028 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"

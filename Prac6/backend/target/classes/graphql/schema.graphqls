@@ -1,0 +1,263 @@
+schema {
+    query: Query,
+    mutation: Mutation,
+}
+
+type Category {
+    id: ID!
+    parentCategory: Category
+    name: String!
+}
+
+type Manufacturer {
+    id: ID!
+    name: String!
+}
+
+input ManufacturerInput {
+    name: String!
+}
+
+type User {
+    id: ID!
+    username: String!
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+}
+
+type Client {
+    user: User!
+    cart: Cart!
+}
+
+type Seller {
+    user: User!
+}
+
+type Author {
+    id: ID!
+    firstName: String!
+    lastName: String!
+}
+
+input AuthorInput {
+    firstName: String!
+    lastName: String!
+}
+
+input UserInput {
+    username: String!
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+}
+
+input UserUpdateInput {
+    username: String
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+}
+
+input ClientInput {
+    user: UserInput
+}
+
+input SellerInput {
+    user: UserInput
+}
+
+input ClientUpdateInput {
+    user: UserUpdateInput
+}
+
+input CategoryInput {
+    name: String!
+    parentCategory: ClientInput
+}
+
+
+
+
+
+input ObjectId {
+    id: Int!
+}
+
+
+
+
+type BaseItem {
+    id: ID!
+    name: String!
+    description: String!
+    price: Float!
+    count: Int!
+    categories: [Category!]!
+    seller: Seller!
+}
+
+input BaseItemInput {
+    name: String!
+    description: String!
+    price: Float!
+    count: Int!
+    categories: [ObjectId!]!
+    seller: ObjectId!
+}
+
+input BaseItemUpdateInput {
+    name: String
+    description: String
+    price: Float
+    count: Int
+    categories: [ObjectId]
+    seller: ObjectId
+}
+
+type Telephone {
+    id: ID!
+    baseItem: BaseItem!
+    batteryCapacity: Int!
+    manufacturer: Manufacturer!
+}
+
+input TelephoneInput {
+    baseItem: BaseItemInput!
+    batteryCapacity: Int!
+    manufacturer: ObjectId!
+}
+
+
+input TelephoneUpdateInput {
+    baseItem: BaseItemUpdateInput
+    batteryCapacity: Int
+    manufacturer: ObjectId
+}
+
+
+type Book {
+    id: ID!
+    baseItem: BaseItem!
+    authors: [Author!]!
+}
+
+
+input BookInput {
+    baseItem: BaseItemInput!
+    authors: [ObjectId!]!
+}
+
+input BookUpdateInput {
+    baseItem: BaseItemUpdateInput
+    authors: [ObjectId]
+}
+
+
+type WashingMachine {
+    id: ID!
+    baseItem: BaseItem!
+    tankCapacity: Int!
+    manufacturer: Manufacturer!
+}
+
+input WashingMachineInput {
+    baseItem: BaseItemInput!
+    tankCapacity: Int!
+    manufacturer: ObjectId!
+}
+
+input WashingMachineUpdateInput {
+    baseItem: BaseItemUpdateInput
+    tankCapacity: Int
+    manufacturer: ObjectId
+}
+
+
+
+type CountItem {
+    id: ID!
+    item: BaseItem!,
+    count: Int!
+}
+
+input CountItemInput {
+    item: ObjectId!,
+    count: Int!
+}
+
+type Cart {
+    id: ID!
+    items: [CountItem]
+}
+
+
+type Mutation {
+    createCategory(category: CategoryInput!): Category!
+    deleteCategoryById(id: Int!): Boolean
+
+    createClient(client: ClientInput!): Client!
+    updateClientById(id: Int!, client: ClientUpdateInput!): Client
+    deleteClientById(id: Int!): Boolean
+
+    createAuthor(author: AuthorInput!): Author!
+    updateAuthorById(id: Int!, author: AuthorInput!): Author
+    deleteAuthorById(id: Int!): Boolean
+
+
+    createManufacturer(manufacturer: ManufacturerInput!): Manufacturer!
+    deleteManufacturerById(id: Int!): Boolean
+
+    createSeller(seller: SellerInput!): Seller!
+    deleteSellerById(id: Int!): Boolean
+
+    createBook(book: BookInput!): Book!
+    updateBookById(id: Int!, book: BookUpdateInput!): Book
+    deleteBookById(id: Int!): Boolean
+
+    createTelephone(telephone: TelephoneInput!): Telephone!
+    updateTelephoneById(id: Int!, telephone: TelephoneUpdateInput!): Telephone
+    deleteTelephoneById(id: Int!): Boolean
+
+    createWashingMachine(washingMachine: WashingMachineInput): WashingMachine!
+    updateWashingMachineById(id: Int!, washingMachine: WashingMachineUpdateInput!): WashingMachine
+    deleteWashingMachineById(id: Int!): Boolean
+
+    addCountItem(cartId: Int!, item: CountItemInput): CountItem!
+    deleteCountItemById(cartId: Int!, countItemId: Int!): Boolean
+    editCountByCartIdAndItemId(cartId: Int!, countItemId: Int!, count: Int!): CountItem
+    setOrder(cartId: Int!): Cart
+}
+
+type Query {
+    findCategoryById(id: Int!): Category
+    findAllCategories: [Category!]!
+
+    findClientById(id: Int!): Client
+    findAllClients: [Client!]!
+
+    findAuthorById(id: Int!): Author
+    findAllAuthors: [Author!]!
+
+    findManufacturerById(id: Int!): Manufacturer
+    findAllManufacturers: [Manufacturer!]!
+
+    findSellerById(id: Int!): Seller
+    findAllSellers: [String!]!
+
+    findBookById(id: Int!): Book
+    findAllBooks: [Book!]!
+
+    findTelephoneById(id: Int!): Telephone
+    findAllTelephones: [Telephone!]!
+
+
+    findWashingMachineById(id: Int!): WashingMachine
+    findAllWashingMachines: [WashingMachine!]!
+
+    findAllItemInCartById(cartId: Int!): [CountItem!]!
+}

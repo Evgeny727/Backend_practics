@@ -1,0 +1,2 @@
+172.23.0.1 - - [13/Nov/2023:14:30:50 +0000] "GET /api-java/graphiql?path=/api-java/graphql HTTP/1.1" 200 2006 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+172.23.0.1 - - [13/Nov/2023:14:30:50 +0000] "POST /api-java/graphql HTTP/1.1" 200 46071 "http://localhost/api-java/graphiql?path=/api-java/graphql" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
