@@ -1,1 +1,4 @@
 2023/11/13 14:26:58 [error] 23#23: *1 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.22.0.1, server: , request: "GET /api-java/graphiql?path=/api-java/graphql HTTP/1.1", upstream: "http://172.22.0.4:8081/graphiql?path=/api-java/graphql", host: "localhost"
+2023/11/19 17:36:08 [error] 22#22: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.19.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2023/11/19 17:39:16 [error] 22#22: *5 open() "/usr/share/nginx/html/login.html" failed (2: No such file or directory), client: 172.19.0.1, server: , request: "GET /login.html HTTP/1.1", host: "localhost"
+2023/11/19 17:58:56 [error] 22#22: *18 open() "/usr/share/nginx/html/login.html" failed (2: No such file or directory), client: 172.19.0.1, server: , request: "GET /login.html HTTP/1.1", host: "localhost"
