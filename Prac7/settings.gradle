@@ -1,0 +1,2 @@
+include("Application", "Authorisation", "common")
+rootProject.name = 'Pr7'

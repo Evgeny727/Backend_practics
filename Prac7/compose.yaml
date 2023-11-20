@@ -1,0 +1,47 @@
+services:
+  db:
+    image: 'postgres:15.2'
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_DB: database
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: "redis:latest"
+
+  auth:
+    build: Authorisation
+    depends_on:
+      - db
+      - redis
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/database
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_REDIS_HOST: redis
+
+  app:
+    build: Application
+    depends_on:
+      - auth
+    ports:
+      - '8080:80'
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/database
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_REDIS_HOST: redis
+
+  site:
+    build: ./nginx
+    depends_on:
+      - app
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/files:/site
+
+volumes:
+  postgres-data:
