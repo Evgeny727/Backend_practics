@@ -1,0 +1,12 @@
+http:
+  port: 8080
+  host: "go-backend"
+  read_timeout: "3s"
+  write_timeout: "3s"
+
+main_db:
+  port: 5432
+  host: "db-postgres"
+  name: "db"
+  user: "db"
+  password: "db"

@@ -1,0 +1,26 @@
+version: "4"
+
+services:
+  db-postgres:
+    image: postgres
+    volumes:
+      - ./go-backend/build/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=db
+      - POSTGRES_PASSWORD=db
+
+  go-backend:
+    build:
+      context: go-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./go-backend/config/:/app/config/
+
+  nginx:
+    image: nginx:1.21.0-alpine
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/etc/nginx/logs
+    ports:
+      - "80:80"

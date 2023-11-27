@@ -1,0 +1,12 @@
+http:
+  port: 8080
+  host: "localhost"
+  read_timeout: "3s"
+  write_timeout: "3s"
+
+main_db:
+  port: 5433
+  host: "localhost"
+  name: "db"
+  user: "db"
+  password: "db"
