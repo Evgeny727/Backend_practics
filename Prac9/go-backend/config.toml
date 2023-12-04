@@ -1,0 +1,7 @@
+# Конфигурация HTTP-сервера
+host = "go-backend"
+port = 8080
+
+# Конфигурация MongoDB
+mongodb_url = "mongodb://root:root@mongo:27017"
+mongodb_database = "file-service"

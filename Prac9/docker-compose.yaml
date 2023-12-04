@@ -1,0 +1,37 @@
+version: "4"
+
+services:
+  go-backend:
+    build:
+      context: go-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./go-backend/config.toml:/app/config.toml
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    environment:
+      - VITE_URL_API=https://localhost
+
+    volumes:
+      - ./frontend/:/app
+      - /app/node_modules/
+  nginx:
+    image: nginx:1.21.0-alpine
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/logs:/etc/nginx/logs
+    ports:
+      - "80:80"
+      - "443:443"
